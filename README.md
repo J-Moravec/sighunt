@@ -6,7 +6,7 @@ There lies a new implementation, that should get rid of all these problems, maki
 verification of putative islands much easier.
 
 As is standard lately among R packages, new SigHunt will utilize:
-* testhat -- for proper code testing
+* testthat -- for proper code testing
 * roxygen2 -- for automatic generation of documentation
 * Rcpp -- for C++ binding where more power is needed
 
