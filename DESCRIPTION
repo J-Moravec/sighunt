@@ -1,0 +1,15 @@
+Encoding: UTF-8
+Package: sighunt
+Title: Tool for horizontal transfer detection.
+Version: 0.01
+Authors@R: person("Jiří", "Moravec", email = "j.moravec@mail.muni.cz",
+                  role = c("aut", "cre"))
+Description: SigHunt is tool for horizontal transfer detection. It utilize
+    nucleotide composition to find genomic region with different composition
+    than the native composition.
+License: GPL-2
+Suggests:
+    testhat,
+    knitr
+VignetteBuilder: knitr
+RoxygenNote: 5.0.1
