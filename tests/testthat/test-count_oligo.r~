@@ -1,0 +1,10 @@
+context("Testing oligonucleotide count")
+
+test_that("Searching for single oligonucleotide", {
+    expect_equal(count_oligo(oligo="A", sequence="ACTGACTG"), 2),
+    expect_equal(count_oligo(oligo="CT", sequence="ACTG"), 1),
+    expect_equal(count_oligo(oligo="TG", sequence="ACTGACTG"), 2),
+    expect_equal(count_oligo(oligo="AGCT", sequence="ACTGACTG"), 0)
+    })
+
+
