@@ -24,7 +24,10 @@
 get_signature = function(sequence, oligos, window=5000, step=1000, file=NULL){
     start_f = function(i){1 + step * (i - 1)}    
 
-    #TODO S3 class for sequence? Make all non-ACTG as N?
+    nonACGT = "[^ACGT]"
+    sequence = gsub(nonACGT, "N", sequence)
+
+    #TODO S3 class for sequence?
     oligo_len = nchar(oligos)
     n_oligos = window - oligo_len + 1
     n_windows = (nchar(sequence) - window) %/% step + 1
@@ -34,14 +37,14 @@ get_signature = function(sequence, oligos, window=5000, step=1000, file=NULL){
     starts = start_f(1:n_windows)
     stops = starts - 1 + window
     rownames(oligo_freq_mat) = paste(starts, stops, sep="-")
-    nonACTG = stringr::fixed("N")
+    N = stringr::fixed("N")
     for (i_step in 1:n_windows){
         start = start_f(i_step)
         stop = start - 1 + window
         subseq = stringr::str_sub(sequence, start, stop)
         oligo_freq = count_oligo(oligos, subseq)
         oligo_freq = oligo_freq / n_oligos
-        N_count = stringr::str_count(pattern=nonACTG, string=subseq)
+        N_count = stringr::str_count(pattern=N, string=subseq)
         N_freq = N_count/window
         oligo_freq_mat[i_step,] = c(oligo_freq, N_freq)
         }    

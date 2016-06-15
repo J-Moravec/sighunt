@@ -1,4 +1,5 @@
 STUFF AT BEGINING ARE IGNORED
 
->starts processing from this
+Starts processing from following line, as it contains ">" character at start.
+>incorrect_sequence
 throws error as this contain illegal characters

@@ -36,7 +36,7 @@ read_fasta = function(file, skip=0, nlines=0, comment.char=""){
 
         #if illegal characters are found, throw warning
         if (grepl(illegal_characters, fasta[[i]])){
-            warning(paste0("WARNING: sequence \"", names(fasta)[i],
+            stop(paste0("ERROR: sequence \"", names(fasta)[i],
                            "\" contains one or more illegal characters."))
             }
         }
