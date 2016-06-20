@@ -13,7 +13,7 @@ create_fake_island(target, source, islands)
 
 \item{islands}{list of vectors of three elements. First is start position of
 island in source sequence, second is start position of island in target
-sequenec. Third is length of island.}
+sequence. Third is length of island.}
 }
 \value{
 modified target sequence with short segments from source sequence

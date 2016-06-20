@@ -1,4 +1,4 @@
-context("Testing fake islands generation.")
+context("Testing fake islands generation")
 
 
 test_that("Test bad input: sequences are not a character type.", {

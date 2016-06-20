@@ -8,7 +8,7 @@
 #' @param source sequence from which islands are taken
 #' @param islands list of vectors of three elements. First is start position of
 #' island in source sequence, second is start position of island in target
-#' sequenec. Third is length of island.
+#' sequence. Third is length of island.
 #'
 #' @return modified target sequence with short segments from source sequence
 #' @export
