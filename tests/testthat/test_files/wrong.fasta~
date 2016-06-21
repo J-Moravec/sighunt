@@ -1,5 +1,0 @@
-STUFF AT BEGINING ARE IGNORED
-
-Starts processing from following line, as it contains ">" character at start.
->incorrect_sequence
-throws error as this contain illegal characters

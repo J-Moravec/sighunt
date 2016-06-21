@@ -9,6 +9,8 @@ test_that("Correct dimension of output", {
     expect_equal(length(DIAS_score(signature[,1])), nrow(signature))
     expect_false(any(DIAS_score(signature[,1], alpha=c(0.05, 0.025, 0.01)) > 3))
     expect_false(any(DIAS_score(signature[,1], alpha=c(0.05, 0.025, 0.01)) < 0))
+
+    expect_equal(length(DIAS_subset_score(signature[,1], 1)), 1)
     })
 
 
@@ -19,4 +21,8 @@ test_that("Correct application and summarization", {
     expect_false(is.list(DIAS_scores_sum(signature)))
     expect_equal(length(DIAS_scores_sum(signature)), nrow(signature))
     expect_equal(names(DIAS_scores_sum(signature)), rownames(signature))
+
+    expect_equal(length(DIAS_subset_scores_sum(signature, 1)), 1)
+    expect_equal(names(DIAS_subset_scores_sum(signature, 1)),
+                 rownames(signature)[1])
     })
