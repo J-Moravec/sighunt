@@ -15,7 +15,7 @@
 #' left and right part. That means that it takes a window left from central
 #' segment and window right. As first segment of signature doesn't have anything
 #' on left and the last segment of signature doesn't have anything on right,
-#' size of actuall subset range from (window+1) to (2\times window + 1)
+#' size of actuall subset range from (window+1) to (2*window + 1)
 #'
 #' Parameter \code{eye} define number of segments in signature (single number
 #' that show frequency of oligonucleotide in part of sequence) that are excluded
@@ -27,12 +27,12 @@
 #' @param window size of subset to the left
 #' @param eye number of segments around centered segment which are excluded
 #'    from density estimation.
+#' @param alpha significance level of scoring intervals.
 #'
 #' @return DIAS score for given signature.
 #' @export
 # TODO a lot of similar code with sliding_density that could be put somewhere
 # TODO else and tested
-# TODO DIAS functions seem clunky, rewrite them
 eye_of_storm = function(signature, oligos=NULL, window=100, eye=5,
                            alpha=c(0.05, 0.025, 0.01)
                            ){
@@ -51,8 +51,8 @@ eye_of_storm = function(signature, oligos=NULL, window=100, eye=5,
         eye_interval = from_eye:to_eye
 
         subset_signature = signature[from:to, ]
-        subset_score = DIAS_subset_eye_scores_sum(signature, pos, eye_interval,
-                                                  alpha=alpha)
+        subset_score = DIAS_scores_sum(signature, pos, eye_interval,
+                                       alpha=alpha)
         score[i] = subset_score
         }
     return(score)

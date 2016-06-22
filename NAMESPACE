@@ -2,7 +2,9 @@
 
 export(count_oligo)
 export(create_fake_island)
+export(eye_of_storm)
 export(generate_oligo)
 export(get_signature)
 export(global_density)
 export(read_fasta)
+export(sliding_density)

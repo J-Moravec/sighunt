@@ -16,12 +16,13 @@
 #' left and right part. That means that it takes a window left from central
 #' segment and window right. As first segment of signature doesn't have anything
 #' on left and the last segment of signature doesn't have anything on right,
-#' size of actuall subset range from (window+1) to (2\times window + 1)
+#' size of actuall subset range from (window+1) to (2*window + 1)
 #'
 #' @param signature signature from \code{\link{get_signature}} function
 #' @param oligos either numeric or character vector of oligonucleotides
 #'    that will be used. If nos specified, whole signature is used.
 #' @param window size of subset to the left
+#' @param alpha significance level of scoring intervals.
 #'
 #' @return DIAS score for given signature.
 #' @export
@@ -42,7 +43,7 @@ sliding_density = function(signature, oligos=NULL, window=100,
         pos = i - from + 1
 
         subset_signature = signature[from:to, ]
-        subset_score = DIAS_subset_scores_sum(signature, pos, alpha=alpha)
+        subset_score = DIAS_scores_sum(signature, pos, alpha=alpha)
         score[i] = subset_score
         }
     return(score)
