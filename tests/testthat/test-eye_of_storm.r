@@ -6,6 +6,6 @@ signature = as.matrix(signature)
 signature = filter_signature(signature)
 
 test_that("dimension of output is correct", {
-    expect_equal(length(sliding_density(signature)), nrow(signature))
-    expect_equal(names(sliding_density(signature)), rownames(signature))
+    expect_equal(length(eye_of_storm(signature, eye=1, bar=FALSE)), nrow(signature))
+    expect_equal(names(eye_of_storm(signature, eye=1, bar=FALSE)), rownames(signature))
     })

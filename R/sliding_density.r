@@ -23,28 +23,18 @@
 #'    that will be used. If nos specified, whole signature is used.
 #' @param window size of subset to the left
 #' @param alpha significance level of scoring intervals.
+#' @param bar show progress bar
 #'
 #' @return DIAS score for given signature.
 #' @export
 # TODO function that given DIAS, original sequence and DIAS treshold,
 # TODO produce subset of sequences as individual as multifasta
 sliding_density = function(signature, oligos=NULL, window=100,
-                           alpha=c(0.05, 0.025, 0.01)
+                           alpha=c(0.05, 0.025, 0.01), bar=TRUE
                            ){
-    signature = filter_signature(signature, oligos)
-    # take subset according to sliding_window, score it, add it to score
-    # nonono, it actually look only on X sample.
-    score = vector(mode="numeric", length=nrow(signature))
-    names(score) = rownames(signature)
-
-    for(i in 1:nrow(signature)){
-        from = max(i - window, 1)
-        to = min(i + window, nrow(signature))
-        pos = i - from + 1
-
-        subset_signature = signature[from:to, ]
-        subset_score = DIAS_scores_sum(signature, pos, alpha=alpha)
-        score[i] = subset_score
-        }
+    score = sliding_density_methods(
+                signature=signature, oligos=oligos,
+                window=window, alpha=alpha, bar=bar
+                )
     return(score)
     }

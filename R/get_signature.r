@@ -2,17 +2,23 @@
 #'
 #' Get signature for sequence. Signature is frequency of oligonucleotides
 #' computed for smaller overlapping subsets -- windows.
+#'
 #' Function \code{get_signature} will partition sequence into individual
 #' windows, neighbouring windows overlap by \code{window-step}.
 #' For these windows, frequency of oligonucleotides is computed as
 #' count of oligonucleotide divided by maximum number of oligonucleotides of
 #' given length in window.
 #'
+#' Oligonucleotides, for which signature will be calculated, can be either
+#' given directly as character vector with \code{oligos} or indirectly as
+#' length of all oligonucleotides.
+#'
 #' Quality of sequence is also outputted, this is computed as frequency of
 #' non-ACGT characters.
 #'
 #' @param sequence string of DNA bases (ACGT)
-#' @param oligos character (or character vector) of oligonucleotide.
+#' @param length length of oligonucleotides for which signature will be calculated
+#' @param oligos character (or character vector) of oligonucleotide for which signature will be calculated
 #' @param window size of windows on which frequency is calculated
 #' @param step amount of bases by which each window is moved #TODO nonsense, better description
 #' @param file If specified, output will be piped file (or connection) instead
@@ -21,7 +27,12 @@
 #' @return matrix of frequencies of \code{oligos} with quality of sequence
 #'
 #' @export
-get_signature = function(sequence, oligos, window=5000, step=1000, file=NULL){
+get_signature = function(sequence, length=4, oligos=NULL, window=5000,
+                         step=1000){
+    if(is.null(oligos)){
+        oligos = generate_oligo(length)
+        }
+
     start_f = function(i){1 + step * (i - 1)}    
 
     nonACGT = "[^ACGT]"

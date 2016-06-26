@@ -28,32 +28,19 @@
 #' @param eye number of segments around centered segment which are excluded
 #'    from density estimation.
 #' @param alpha significance level of scoring intervals.
+#' @oaram bar show progress bar
 #'
 #' @return DIAS score for given signature.
 #' @export
-# TODO a lot of similar code with sliding_density that could be put somewhere
-# TODO else and tested
+# TODO WARNING for situation where signature/windows is almost as big as eye
+# TODO (after filtering and everything) so density cannot be estimated well!
 eye_of_storm = function(signature, oligos=NULL, window=100, eye=5,
-                           alpha=c(0.05, 0.025, 0.01)
+                           alpha=c(0.05, 0.025, 0.01), bar=TRUE
                            ){
-    signature = filter_signature(signature, oligos)
-    # take subset according to sliding_window, score it, add it to score
-    # nonono, it actually look only on X sample.
-    score = vector(mode="numeric", length=nrow(signature))
-    names(score) = rownames(signature)
-
-    for(i in 1:nrow(signature)){
-        from = max(i - window, 1)
-        to = min(i + window, nrow(signature))
-        pos = i - from + 1
-        from_eye = ifelse(i - eye < 1, 1, i - eye)
-        to_eye = ifelse(i + eye > nrow(signature), nrow(signature), i + eye)
-        eye_interval = from_eye:to_eye
-
-        subset_signature = signature[from:to, ]
-        subset_score = DIAS_scores_sum(signature, pos, eye_interval,
-                                       alpha=alpha)
-        score[i] = subset_score
-        }
+    score = sliding_density_methods(
+        signature=signature, oligos=oligos,
+        window=window, eye=eye, alpha=alpha,
+        bar=bar
+        )
     return(score)
     }
